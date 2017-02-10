@@ -40,7 +40,7 @@ type JSONCareerRepository struct {
 	techUsedStore DataStore
 	jobs          []Job
 	techUsed      []TechUsed
-	lock          *sync.RWMutex
+	lock          sync.RWMutex
 }
 
 // GetJobs This implementation is eagerly loaded, so just returns

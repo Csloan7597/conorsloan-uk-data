@@ -20,7 +20,7 @@ type DataStore interface {
 // OSFileDataStore implementation of DataStore which saves data to a file
 type OSFileDataStore struct {
 	path string
-	lock *sync.RWMutex
+	lock sync.RWMutex
 }
 
 // Writes the specified content to the data store as is

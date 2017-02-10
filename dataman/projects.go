@@ -28,7 +28,7 @@ type ProjectRepository interface {
 type JSONProjectRepository struct {
 	projectStore DataStore
 	projects     []Project
-	lock         *sync.RWMutex
+	lock         sync.RWMutex
 }
 
 // Loads this repository from file

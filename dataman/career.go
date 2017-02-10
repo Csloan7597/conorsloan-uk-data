@@ -23,7 +23,7 @@ type Job struct {
 type TechUsed struct {
 	Title       string `json:"name"`
 	Description string `json:"description"`
-	Type        string `json:"type"`
+	Type        string `json:"type,omitempty"`
 }
 
 // CareerRepository A place to store and retrieve persisted Career info
@@ -128,7 +128,6 @@ func (repo *JSONCareerRepository) load() error {
 
 	// Load Jobs
 	var jobs []Job
-	var job Job
 
 	jobLines, err := repo.jobsStore.ReadLines()
 	if err != nil {
@@ -136,6 +135,7 @@ func (repo *JSONCareerRepository) load() error {
 	}
 
 	for _, jobLine := range jobLines {
+		var job Job
 		if jsonerr := json.Unmarshal(jobLine, &job); jsonerr != nil {
 			return jsonerr
 		}
@@ -145,7 +145,6 @@ func (repo *JSONCareerRepository) load() error {
 	// Load Tech Used
 
 	var techsUsed []TechUsed
-	var techUsed TechUsed
 
 	techUsedLines, err := repo.jobsStore.ReadLines()
 	if err != nil {
@@ -153,6 +152,7 @@ func (repo *JSONCareerRepository) load() error {
 	}
 
 	for _, techUsedLine := range techUsedLines {
+		var techUsed TechUsed
 		if err := json.Unmarshal(techUsedLine, &techUsed); err != nil {
 			return err
 		}

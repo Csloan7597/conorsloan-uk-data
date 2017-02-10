@@ -1,0 +1,13 @@
+{"name": "Java","description": "My first and strongest programming language. I have 4+ years professional experience with Java, and have used it in many of my side projects and studies."}
+{"name": "Python","description": "Since learning Python in my first year of University, I have used it in 2 of my jobs, and regularly use it to perform scripting tasks for automation."}
+{ "name": "Golang","description": "Having learnt Go during my time at Apple, I use it for projects where speed of development and simplicity is key. The backend of this site is built using Go!"}
+{ "name": "Swift","description": "I learned Swift at Apple, and it is currently my most used language. This language champions immutability, protocol-oriented programming, and makes heavy use of functional concepts; all have massively influenced my coding style."}
+{"name": "Bash","description": "Bash Scripting is a guilty pleasure of mine; at Oracle, I spent a lot of my time writing bash scripts for deployment automation. I regularly write scripts at my current position for cron jobs."}
+{"name": "PHP","description": "I began to use PHP during my current position, developing within a large codebase with millions of lines of code. While it is not my strongest language, I am confident in my skill level."}
+{"name": "JavaScript","description": "During my time at Amazon, I worked a lot with different JavaScript related technologies, having taken part in a mentorship program and had a senior engineer teach me. I have developed personally and professionally with JS (including this website, which uses React!)."}
+{"name": "Scala","description": "I am very interested in Functional Programming, and have been recently taking courses and teaching myself Scala. I plan to start new projects using Scala in the near future."}
+{"name": "SQL","description": "I learned SQL during my time at University, and have used it professionally."}
+{"name": "Unix/Linux","description": "Having worked professionally with Red Hat, Ubuntu (& other debian), Oracle Enterprise Linux, and Unix-based Solaris, I have a lot of experience with *nix systems."}
+{"name": "Amazon Web Services","description": "Currently, I am working with AWS at amazon, as the website systems are hosted using EC2, and various other services are in use."}
+{"name": "Big Data","description": "During my time at BT, I worked on a big data project, and learned a lot of the concepts involved with creating processes that scale. I worked with Apache Hadoop & Giraph to create large scale graph processing in Java."}
+{"name": "NoSQL", "description": "I have used MongoDB & Redis in side projects and during my employment with Amazon."}

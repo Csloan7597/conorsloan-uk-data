@@ -9,12 +9,13 @@ import (
 type Project struct {
 	ID               string   `json:"id"`
 	Name             string   `json:"name"`
+	TagLine          string   `json:"tagLine"`
 	ShortDescription string   `json:"shortDescription"`
 	LongDescription  string   `json:"longDescription"`
-	LargeIcon        string   `json:"largeIcon"`
-	SmallIcon        string   `json:"smallIcon"`
-	TechUsed         []string `json:"techUsed"`
-	Repository       string   `json:"repoLink"`
+	LargeImages      []string `json:"largeImages"`
+	SmallImage       string   `json:"smallImage"`
+	TechUsed         string   `json:"techUsed"`
+	Repository       string   `json:"projectRepo"`
 }
 
 // ProjectRepository A place to store and retrieve persisted Project info
@@ -38,7 +39,6 @@ func (repo *JSONProjectRepository) load() error {
 	defer repo.lock.Unlock()
 
 	var projects []Project
-	var p Project
 
 	lines, err := repo.projectStore.ReadLines()
 	if err != nil {
@@ -46,6 +46,7 @@ func (repo *JSONProjectRepository) load() error {
 	}
 
 	for _, line := range lines {
+		var p Project
 		if err := json.Unmarshal(line, &p); err != nil {
 			return err
 		}

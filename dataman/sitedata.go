@@ -7,12 +7,12 @@ import (
 
 // GlanceItem a feature of the home page of my site
 type GlanceItem struct {
-	ID           string   `json:"id"`
+	ID           string   `json:"id,omitempty"`
 	Title        string   `json:"title"`
-	StartDate    string   `json:"startDate"`
-	EndDate      string   `json:"endDate"`
+	StartDate    string   `json:"startDate,omitempty"`
+	EndDate      string   `json:"endDate,omitempty"`
 	Content      []string `json:"content"`
-	RelatedImage string   `json:"relatedImage"`
+	RelatedImage string   `json:"relatedImage,omitempty"`
 }
 
 // ProjectListing Link to a project
@@ -66,7 +66,6 @@ func (repo *JSONSiteDataRepository) load() error {
 	// Load glanceItems
 
 	var glanceItems []GlanceItem
-	var glanceItem GlanceItem
 
 	glanceData, err := repo.glanceItemsStore.ReadLines()
 	if err != nil {
@@ -74,16 +73,18 @@ func (repo *JSONSiteDataRepository) load() error {
 	}
 
 	for _, lineData := range glanceData {
+		var glanceItem GlanceItem
+
 		if jsonerr := json.Unmarshal(lineData, &glanceItem); jsonerr != nil {
 			return jsonerr
 		}
+
 		glanceItems = append(glanceItems, glanceItem)
 	}
 
 	// Load projectListings
 
 	var projects []ProjectListing
-	var project ProjectListing
 
 	projectData, err := repo.projectListingStore.ReadLines()
 	if err != nil {
@@ -91,6 +92,8 @@ func (repo *JSONSiteDataRepository) load() error {
 	}
 
 	for _, projectLine := range projectData {
+		var project ProjectListing
+
 		if jsonerr := json.Unmarshal(projectLine, &project); jsonerr != nil {
 			return jsonerr
 		}

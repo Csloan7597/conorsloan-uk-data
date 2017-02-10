@@ -78,6 +78,8 @@ func main() {
 		panic(err)
 	}
 
+	fmt.Printf("Data: %v %v %v\n", siteDataRepo, careerRepo, projectRepo)
+
 	http.HandleFunc("/api/tagline", taglineHandler)
 
 	http.HandleFunc("/", handler)

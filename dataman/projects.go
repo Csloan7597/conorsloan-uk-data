@@ -101,7 +101,7 @@ func (repo *JSONProjectRepository) Save(projects []Project) error {
 
 // NewJSONProjectRepository New instance of a JSONProjectRepository using default file from config
 func NewJSONProjectRepository(dataDirPath string) (*JSONProjectRepository, error) {
-	return NewJSONProjectRepositoryUsingFile("TODOGETMEFROMCONFIG")
+	return NewJSONProjectRepositoryUsingFile(dataDirPath + "/projects.data")
 }
 
 // NewJSONProjectRepositoryUsingFile New instance of JSONProjectRepository using the specified file

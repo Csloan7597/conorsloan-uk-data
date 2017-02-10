@@ -300,7 +300,8 @@ func (repo *JSONSiteDataRepository) SaveAboutMeData(data AboutMeData) error {
 
 // NewJSONSiteDataRepository New instance of a NewJSONSiteDataRepository using default files from config
 func NewJSONSiteDataRepository(dataDirPath string) (*JSONSiteDataRepository, error) {
-	return NewJSONSiteDataRepositoryUsingFiles("TODOGETMEFROMCONFIG", "", "", "", "")
+	return NewJSONSiteDataRepositoryUsingFiles(dataDirPath+"/glance.data", dataDirPath+"/projectList.data",
+		dataDirPath+"/cv.data", dataDirPath+"/aboutMe.data", dataDirPath+"tagLine.data")
 }
 
 // NewJSONSiteDataRepositoryUsingFiles New instance of JSONSiteDataRepository using the specified files

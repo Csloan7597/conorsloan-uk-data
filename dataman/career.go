@@ -168,7 +168,7 @@ func (repo *JSONCareerRepository) load() error {
 
 // NewJSONCareerRepository New instance of a JSONProjectRepository using default file from config
 func NewJSONCareerRepository(dataDirPath string) (*JSONCareerRepository, error) {
-	return NewJSONCareerRepositoryUsingFiles("TODOGETMEFROMCONFIG", "andMe")
+	return NewJSONCareerRepositoryUsingFiles(dataDirPath+"/jobs.data", dataDirPath+"/techUsed.data")
 }
 
 // NewJSONCareerRepositoryUsingFiles New instance of JSONProjectRepository using the specified file

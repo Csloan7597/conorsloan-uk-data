@@ -16,7 +16,8 @@ type Job struct {
 	Location         string   `json:"location"`
 	Responsibilities []string `json:"responsibilities"`
 	Achievements     []string `json:"achievements"`
-	TechUsed         []string `json:"techUsed"`
+	TechUsed         string   `json:"techUsed"`
+	Current          bool     `json:"currentJob"`
 }
 
 // TechUsed represents a technology i have used and a description of where

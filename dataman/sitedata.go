@@ -17,7 +17,7 @@ type GlanceItem struct {
 
 // ProjectListing Link to a project
 type ProjectListing struct {
-	ID          string `json:"id"`
+	ProjectID   string `json:"id"`
 	ProjectName string `json:"projectName"`
 	Path        string `json:"path"`
 }

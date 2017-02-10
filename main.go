@@ -145,9 +145,12 @@ func main() {
 	http.HandleFunc("/api/career/jobs", jobsHandler)
 	http.HandleFunc("/api/career/techused", techUsedHandler)
 
-	http.HandleFunc("/", handler)
+	fs := http.FileServer(http.Dir(config.ServePath))
+	http.Handle("/", http.StripPrefix("/", fs))
+
 	http.ListenAndServe(":8080", nil)
 }
 
 // TODO: All the posts
 // TODO: /contact
+// TODO: Assets handler

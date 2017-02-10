@@ -106,10 +106,6 @@ func (store *OSFileDataStore) ReadLines() ([][]byte, error) {
 		lines = append(lines, scanner.Bytes())
 	}
 
-	for scanner.Scan() {
-		lines = append(lines, scanner.Bytes())
-	}
-
 	if err := scanner.Err(); err != nil {
 		return nil, err
 	}

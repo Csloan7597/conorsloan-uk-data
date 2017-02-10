@@ -3,11 +3,15 @@ package main
 import (
 	"fmt"
 	"net/http"
+
+	"github.com/Csloan7597/conorsloan-uk-data/dataman"
 )
 
 var (
 	config       Config
-	siteDataRepo SiteDataRepository
+	siteDataRepo dataman.SiteDataRepository
+	careerRepo   dataman.CareerRepository
+	projectRepo  dataman.ProjectRepository
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -56,8 +60,23 @@ func contactHandler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	fmt.Println("conorsloan.uk data-service. Starting...")
-	config := NewConfig()
-	fmt.Printf("Config: %v", config)
+	config = NewConfig()
+	fmt.Printf("Config: %v\n", config)
+
+	siteDataRepo, err := dataman.NewJSONSiteDataRepository(config.DataPath)
+	if err != nil {
+		panic(err)
+	}
+
+	careerRepo, err := dataman.NewJSONCareerRepository(config.DataPath)
+	if err != nil {
+		panic(err)
+	}
+
+	projectRepo, err := dataman.NewJSONProjectRepository(config.DataPath)
+	if err != nil {
+		panic(err)
+	}
 
 	http.HandleFunc("/api/tagline", taglineHandler)
 

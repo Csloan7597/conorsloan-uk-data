@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 
@@ -19,55 +20,94 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func taglineHandler(w http.ResponseWriter, r *http.Request) {
-	link, err := siteDataRepo.GetCVLink()
-
-	if err == nil {
+	if link, err := siteDataRepo.GetTagLine(); err == nil {
 		w.WriteHeader(http.StatusOK)
 		fmt.Fprint(w, link)
 	} else {
-		w.WriteHeader(http.StatusInternalServerError)
-		fmt.Fprint(w, err.Error())
+		writeError(w, err)
 	}
 }
 
 func aboutMeHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "{}")
-}
-
-func aboutMeImagesHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "{}")
+	aboutMe, err := siteDataRepo.GetAboutMeData()
+	if err != nil {
+		writeError(w, err)
+	} else {
+		writeJSONOrError(w, aboutMe)
+	}
 }
 
 func projectsHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "{}")
+	projects, err := projectRepo.GetProjects()
+	if err != nil {
+		writeError(w, err)
+	} else {
+		writeJSONOrError(w, projects)
+	}
 }
 
 func projectsListHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "{}")
-}
-
-func projectsGlanceHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "{}")
+	projects, err := siteDataRepo.GetProjectListings()
+	if err != nil {
+		writeError(w, err)
+	} else {
+		writeJSONOrError(w, projects)
+	}
 }
 
 func cvHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "{}")
+	if link, err := siteDataRepo.GetCVLink(); err == nil {
+		w.WriteHeader(http.StatusOK)
+		fmt.Fprint(w, link)
+	} else {
+		writeError(w, err)
+	}
 }
 
 func jobsHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "{}")
+	jobs, err := careerRepo.GetJobs()
+	if err != nil {
+		writeError(w, err)
+	} else {
+		writeJSONOrError(w, jobs)
+	}
 }
 
 func techUsedHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "{}")
+	techsUsed, err := careerRepo.GetTechUsed()
+	if err != nil {
+		writeError(w, err)
+	} else {
+		writeJSONOrError(w, techsUsed)
+	}
 }
 
 func glanceHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "{}")
+	glances, err := siteDataRepo.GetGlanceItems()
+	if err != nil {
+		writeError(w, err)
+	} else {
+		writeJSONOrError(w, glances)
+	}
 }
 
 func contactHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "{}")
+	writeError(w, fmt.Errorf("NOT YET IMPLEMENTED"))
+}
+
+func writeJSONOrError(w http.ResponseWriter, toMarshal interface{}) {
+	json, err := json.Marshal(toMarshal)
+	if err != nil {
+		writeError(w, err)
+	} else {
+		w.WriteHeader(http.StatusOK)
+		fmt.Fprintf(w, string(json))
+	}
+}
+
+func writeError(w http.ResponseWriter, err error) {
+	w.WriteHeader(http.StatusInternalServerError)
+	fmt.Fprintf(w, "{\"error\": \"%s\"}", err.Error())
 }
 
 func main() {
@@ -92,7 +132,7 @@ func main() {
 		panic(err)
 	}
 
-	fmt.Printf("Data: %v %v %v\n", siteDataRepo, careerRepo, projectRepo)
+	fmt.Printf("Loaded up, listening on port %v\n", config.Port)
 
 	http.HandleFunc("/api/tagline", taglineHandler)
 	http.HandleFunc("/api/aboutme", aboutMeHandler)

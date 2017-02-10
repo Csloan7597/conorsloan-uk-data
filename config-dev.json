@@ -1,0 +1,6 @@
+{
+  "port": 8080,
+  "servePath": "public",
+  "dataPath": "/tmp/site-data",
+  "env": "development"
+}

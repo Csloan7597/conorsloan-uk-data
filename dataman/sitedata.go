@@ -37,7 +37,7 @@ type SiteDataRepository interface {
 	GetCVLink() (string, error)
 	SaveCVLink(string) error
 	GetTagLine() (string, error)
-	SaveTagLine() error
+	SaveTagLine(string) error
 	GetAboutMeData() (AboutMeData, error)
 	SaveAboutMeData(AboutMeData) error
 }

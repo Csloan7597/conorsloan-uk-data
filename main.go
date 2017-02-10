@@ -19,7 +19,15 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 
 func taglineHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "{\"hello\": \"world\"}")
+	link, err := siteDataRepo.GetCVLink()
+
+	if err == nil {
+		w.WriteHeader(http.StatusOK)
+		fmt.Fprint(w, link)
+	} else {
+		w.WriteHeader(http.StatusInternalServerError)
+		fmt.Fprint(w, err.Error())
+	}
 }
 
 func aboutMeHandler(w http.ResponseWriter, r *http.Request) {
@@ -50,7 +58,11 @@ func jobsHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "{}")
 }
 
-func jobsGlanceHandler(w http.ResponseWriter, r *http.Request) {
+func techUsedHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprint(w, "{}")
+}
+
+func glanceHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "{}")
 }
 
@@ -63,17 +75,19 @@ func main() {
 	config = NewConfig()
 	fmt.Printf("Config: %v\n", config)
 
-	siteDataRepo, err := dataman.NewJSONSiteDataRepository(config.DataPath)
+	var err error
+
+	siteDataRepo, err = dataman.NewJSONSiteDataRepository(config.DataPath)
 	if err != nil {
 		panic(err)
 	}
 
-	careerRepo, err := dataman.NewJSONCareerRepository(config.DataPath)
+	careerRepo, err = dataman.NewJSONCareerRepository(config.DataPath)
 	if err != nil {
 		panic(err)
 	}
 
-	projectRepo, err := dataman.NewJSONProjectRepository(config.DataPath)
+	projectRepo, err = dataman.NewJSONProjectRepository(config.DataPath)
 	if err != nil {
 		panic(err)
 	}
@@ -81,18 +95,19 @@ func main() {
 	fmt.Printf("Data: %v %v %v\n", siteDataRepo, careerRepo, projectRepo)
 
 	http.HandleFunc("/api/tagline", taglineHandler)
+	http.HandleFunc("/api/aboutme", aboutMeHandler)
+	http.HandleFunc("/api/glance", glanceHandler)
+
+	http.HandleFunc("/api/project/list", projectsListHandler)
+	http.HandleFunc("/api/project", projectsHandler)
+
+	http.HandleFunc("/api/career/cv", cvHandler)
+	http.HandleFunc("/api/career/jobs", jobsHandler)
+	http.HandleFunc("/api/career/techused", techUsedHandler)
 
 	http.HandleFunc("/", handler)
 	http.ListenAndServe(":8080", nil)
 }
 
-// tagline /GET
-// Aboutme /GET
-// Aboutme/images /GET
-// projectList /GET
-// projects /GET
-// projects/glance
-// CV /GET
-// jobs  /GET
-// jobs/glance
-// Contact /POST
+// TODO: All the posts
+// TODO: /contact

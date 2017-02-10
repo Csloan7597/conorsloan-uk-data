@@ -11,7 +11,7 @@ type Project struct {
 	Name             string   `json:"name"`
 	TagLine          string   `json:"tagLine"`
 	ShortDescription string   `json:"shortDescription"`
-	LongDescription  string   `json:"longDescription"`
+	LongDescription  []string `json:"longDescription"`
 	LargeImages      []string `json:"largeImages"`
 	SmallImage       string   `json:"smallImage"`
 	TechUsed         string   `json:"techUsed"`

@@ -99,6 +99,13 @@ func (store *OSFileDataStore) ReadLines() ([][]byte, error) {
 
 	scanner := bufio.NewScanner(file)
 
+	buf := make([]byte, 0, 64*1024)
+	scanner.Buffer(buf, 1024*1024)
+
+	for scanner.Scan() {
+		lines = append(lines, scanner.Bytes())
+	}
+
 	for scanner.Scan() {
 		lines = append(lines, scanner.Bytes())
 	}

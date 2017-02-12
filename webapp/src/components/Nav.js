@@ -32,6 +32,7 @@ class NavigationBar extends Component {
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
+        <Navbar.Collapse>
           <Nav>
             <IndexLinkContainer to="/">
               <NavItem eventKey={1}>
@@ -60,6 +61,7 @@ class NavigationBar extends Component {
               }
             </NavDropdown>
           </Nav>
+        </Navbar.Collapse>
       </Navbar>
     )
   }

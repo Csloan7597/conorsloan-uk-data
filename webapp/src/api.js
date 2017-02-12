@@ -1,5 +1,14 @@
 const API_URL='http:localhost:8080/api/'
 
+// Nav
+
+export const fetchProjectNavList = () => {
+  return fetch('api/project/list')
+    .then(response => {
+      return response.json() // TODO: Error Handling of this all
+    })
+}
+
 // ABOUT ME
 
 export const fetchAboutMeData = () => {

@@ -18,8 +18,7 @@ type GlanceItem struct {
 // ProjectListing Link to a project
 type ProjectListing struct {
 	ProjectID   string `json:"id"`
-	ProjectName string `json:"projectName"`
-	Path        string `json:"path"`
+	ProjectName string `json:"name"`
 }
 
 // AboutMeData Data for About Me, including main content and a set of images

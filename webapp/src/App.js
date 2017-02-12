@@ -13,9 +13,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header {...this.props.navData}/>
-        <div className="container">
-          {this.props.children}
-        </div>
+        {this.props.children}
         <Footer />
       </div>
     );

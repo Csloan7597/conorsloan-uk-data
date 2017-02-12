@@ -1,5 +1,5 @@
 import * as api from '../api';
-import * as actionTypes from './action-types'
+import * as actionTypes from './action-types';
 
 export const getProjectNavList = () => dispatch => {
   console.log(api);

@@ -33,3 +33,12 @@ export const fetchGlanceItems = () => {
       return response.json() // TODO: Error Handling of this all
     })
 }
+
+// Projects
+
+export const fetchProjects = () => {
+  return fetch('/api/project')
+    .then(response => {
+      return response.json() // TODO: Error handling
+    })
+}

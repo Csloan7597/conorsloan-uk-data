@@ -6,15 +6,17 @@ import * as homeActions from '../actions/home-actions';
 class HomeContainer extends Component {
 
   componentWillMount() {
-    this.props.homeActions.getTagline()
-    this.props.homeActions.getGlanceItems()
+    if (this.props.homeData.tagline == null) {
+      this.props.homeActions.getTagline()
+    }
+    if (this.props.homeData.glanceItems == null) {
+      this.props.homeActions.getGlanceItems()
+    }
     //this.props.homeActions.getImages()
   }
 
   render() {
     const {homeData, homeActions} = this.props
-    console.log("PRINTING PROPS");
-    console.log(this.props);
 
     return (
       <div>

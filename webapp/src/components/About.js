@@ -6,22 +6,24 @@ import * as aboutMeActions from '../actions/about-actions';
 class AboutContainer extends Component {
 
   componentWillMount() {
-    this.props.aboutMeActions.getAboutMeData()
+    if (this.props.aboutMeData == null) {
+        this.props.aboutMeActions.getAboutMeData();
+    }
   }
 
   render() {
-    const {aboutMeData, aboutMeActions} = this.props
+    const {aboutMeData, aboutMeActions} = this.props;
 
     return (
-      <p> ABOUT ME </p>
-    )
+      <p> ABOUT ME {aboutMeData === null ? "null" : aboutMeData.content[0]}</p>
+    );
   }
 
 }
 
 function mapStateToProps(state) {
   return {
-    aboutMeData: state
+    aboutMeData: state.aboutMeData
   }
 }
 

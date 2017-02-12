@@ -11,10 +11,11 @@ const defaultConfig = "config-dev.json"
 
 // Config config data
 type Config struct {
-	Port      int
-	ServePath string
-	DataPath  string
-	Env       string
+	Port       int
+	ServePath  string
+	DataPath   string
+	Env        string
+	WebappPath string
 }
 
 // NewConfigUsingFile allows custom file

@@ -1,0 +1,3 @@
+export const SET_ABOUTME_DATA = 'SET_ABOUTME_DATA';
+export const SET_TAGLINE = "SET_TAGLINE";
+export const SET_GLANCE_ITEMS = "SET_GLANCE_ITEMS";

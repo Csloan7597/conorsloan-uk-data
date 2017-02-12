@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"strings"
 
 	"github.com/Csloan7597/conorsloan-uk-data/dataman"
 )
@@ -146,7 +147,16 @@ func main() {
 	http.HandleFunc("/api/career/techused", techUsedHandler)
 
 	fs := http.FileServer(http.Dir(config.ServePath))
-	http.Handle("/", http.StripPrefix("/", fs))
+	http.Handle("/static/", http.StripPrefix("/static/", fs))
+
+	// Want to handle favicon and js files here and serve them, otherwise just serve index.html
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		if strings.HasSuffix(r.URL.Path, ".js") || strings.HasSuffix(r.URL.Path, ".ico") {
+			http.ServeFile(w, r, config.WebappPath+r.URL.Path[1:])
+		} else {
+			http.ServeFile(w, r, config.WebappPath+"index.html")
+		}
+	})
 
 	http.ListenAndServe(":8080", nil)
 }

@@ -1,6 +1,7 @@
 {
   "port": 8080,
-  "servePath": "./webapp/build",
+  "servePath": "./webapp/build/static",
   "dataPath": "./site-data",
+  "webappPath": "./webapp/build/",
   "env": "development"
 }
